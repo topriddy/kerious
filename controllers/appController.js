@@ -13,18 +13,18 @@ getSender = async (user) => {
 
 exports.askQuestion = async (req, res) => {
     let sender;
-    
+
     if (!req.user) {
-        sender = { username: "Anon", _id: process.env.ANON_ID}
-     } else {
-         sender = await getSender(req.user);
-     }
+        sender = {username: "Anon", _id: process.env.ANON_ID}
+    } else {
+        sender = await getSender(req.user);
+    }
 
     const destination = await User.findByUsername(req.body.destination);
 
-    let question = { 
-        text: req.body.text, 
-        sender, 
+    let question = {
+        text: req.body.text,
+        sender,
         destination
     }
 
@@ -35,7 +35,6 @@ exports.askQuestion = async (req, res) => {
         console.log(error)
         res.send(error)
     }
-
 }
 
 exports.getUsers = async (req, res) => {
